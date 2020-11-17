@@ -6,17 +6,17 @@ class DuplexDiv extends HTMLElement {
     connectedCallback() {
         const α = this.attachShadow({mode: "open"});
         
-        const ν = document.createElement("div");
         const μ = document.createElement("div");
         const τ = document.createElement("slot");
-        Object.defineProperty(this, "slotElement", {value: τ, writable: false});
+        const ν = document.createElement("div");
         Object.defineProperty(this, "divElement1", {value: ν, writable: false});
+        Object.defineProperty(this, "slotElement", {value: τ, writable: false});
         Object.defineProperty(this, "divElement2", {value: μ, writable: false});
-        μ.setAttribute("part", "duplicate");
+        ν.setAttribute("part", "duplicate");
         μ.append(τ);
-        α.append(ν, μ);
+        α.append(μ, ν);
 
-        const λ = (_, ω) => {this.render();}
+        const λ = () => {this.render();}
         this.observer = new MutationObserver(λ);
         this.observer.observe(this, {subtree: true, childList: true, attributes: true})
 
