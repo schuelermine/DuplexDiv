@@ -18,7 +18,7 @@ class DuplexDiv extends HTMLElement {
 
         const λ = () => {this.render();}
         this.observer = new MutationObserver(λ);
-        this.observer.observe(this, {subtree: true, childList: true, attributes: true})
+        this.observer.observe(this, {subtree: true, childList: true, attributes: true, characterData: true})
 
         const ξ = () => {
             window.removeEventListener("DOMContentLoaded", ξ);
