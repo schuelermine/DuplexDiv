@@ -4,7 +4,7 @@ class DuplexDiv extends HTMLElement {
     }
 
     connectedCallback() {
-        const α = this.attachShadow({"mode": "open"});
+        const α = this.attachShadow({mode: "open"});
         
         const μ = document.createElement("div");
         const τ = document.createElement("slot");
@@ -18,7 +18,7 @@ class DuplexDiv extends HTMLElement {
 
         const λ = () => {this.render();}
         this.observer = new MutationObserver(λ);
-        this.observer.observe(this, {"subtree": true, "childList": true, "attributes": true, "characterData": true})
+        this.observer.observe(this, {subtree: true, childList: true, attributes: true, characterData: true})
 
         const ξ = () => {
             window.removeEventListener("DOMContentLoaded", ξ);
@@ -26,16 +26,23 @@ class DuplexDiv extends HTMLElement {
         }
         window.addEventListener("DOMContentLoaded", ξ);
 
-        if (this.getAttribute("debug") !== null) {
-            console.log({
-                "class": DuplexDiv,
-                "event": "connected"
-            })
-        }
+        console.log("DuplexDiv: connected");
+    }
+
+    disconnectedCallback() {
+        console.log("DuplexDiv: disconnected");
     }
 
     static get observedAttributes() {
-        return ["debug"];
+        return [];
+    }
+
+    attributeChangedCallback(_name, _oldvalue, _newvalue) {
+        // pass
+    }
+
+    adoptedCallback() {
+        console.log("DuplexDiv: adopted");
     }
 
     render() {
@@ -45,41 +52,6 @@ class DuplexDiv extends HTMLElement {
         this.slotElement.assignedNodes().forEach(ω => {
             this.divElement1.append(ω.cloneNode(true))
         });
-        
-        if (this.getAttribute("debug") !== null) {
-            console.log({
-                "class": DuplexDiv,
-                "event": "render"
-            })
-        }
-    }
-
-    disconnectedCallback() {
-        if (this.getAttribute("debug") !== null) {
-            console.log({
-                "class": DuplexDiv,
-                "event": "disconnected"
-            })
-        }
-    }
-
-    attributeChangedCallback(β, ε, δ) {
-        if (this.getAttribute("debug") !== null) {
-            console.log({
-                "class": DuplexDiv,
-                "event": "attributeChanged",
-                "parameters": (β, ε, δ)
-            })
-        }
-    }
-
-    adoptedCallback() {
-        if (this.getAttribute("debug") !== null) {
-            console.log({
-                "class": DuplexDiv,
-                "event": "adopted"
-            })
-        }
     }
 }
 
